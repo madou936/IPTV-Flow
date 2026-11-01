@@ -1,0 +1,13 @@
+node_modules
+out
+release
+dist
+.DS_Store
+*.log
+
+.test-build/
+native/evs-venv/
+firestick/
+pwa/
+.env*
+resources/opensubtitles-key.txt

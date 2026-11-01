@@ -1,0 +1,8 @@
+Streamly ad-filter snapshot (2026-10-28)
+EasyList: https://easylist.to/easylist/easylist.txt
+EasyPrivacy: https://easylist.to/easylist/easyprivacy.txt
+Liste FR: https://easylist-downloads.adblockplus.org/liste_fr.txt
+uBlock Origin filters: https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/filters-2020.txt
+uBlock Origin privacy: https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/privacy.txt
+uBlock Origin unbreak: https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/unbreak.txt
+Updated copies are stored in the IPTV Flow user data folder after download.

@@ -1,0 +1,108 @@
+{
+  "name": "iptv-player",
+  "version": "0.1.0",
+  "description": "IPTV Flow — lecteur IPTV Mac (Xtream Codes) avec Picture-in-Picture",
+  "author": "madoutandia",
+  "main": "./out/main/index.js",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "typecheck": "tsc --noEmit",
+    "test": "esbuild tests/*.test.ts --bundle --platform=node --format=cjs --outdir=.test-build && node --test .test-build/*.test.js",
+    "preview": "electron-vite preview",
+    "dist:mac": "electron-vite build && electron-builder --mac --arm64 --dir && node scripts/seal-mac-release.mjs && electron-builder --mac dmg --arm64 --prepackaged \"release/mac-arm64/IPTV Flow.app\""
+  },
+  "dependencies": {
+    "@ghostery/adblocker-electron": "^2.20.1",
+    "castv2-client": "^1.2.0",
+    "ffmpeg-static": "^5.2.0",
+    "ffprobe-static": "^3.1.0",
+    "multicast-dns": "^7.2.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "electron": "github:castlabs/electron-releases#v44.9.3+wvcus",
+    "electron-builder": "^24.13.3",
+    "electron-vite": "^2.3.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.0"
+  },
+  "build": {
+    "appId": "com.madoutandia.iptvflow",
+    "productName": "IPTV Flow",
+    "electronDist": "node_modules/electron/dist",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "out/**/*",
+      "package.json",
+      "node_modules/castv2/**/*",
+      "node_modules/castv2-client/**/*",
+      "node_modules/ffmpeg-static/**/*",
+      "node_modules/ffprobe-static/**/*",
+      "node_modules/multicast-dns/**/*",
+      "node_modules/@ghostery/**/*",
+      "node_modules/@remusao/**/*",
+      "node_modules/tldts-experimental/**/*",
+      "node_modules/tldts-core/**/*"
+    ],
+    "asarUnpack": [
+      "node_modules/ffmpeg-static/**",
+      "node_modules/ffprobe-static/**"
+    ],
+    "extraResources": [
+      {
+        "from": "resources/streamly-adblock-base.bin",
+        "to": "streamly-adblock-base.bin"
+      },
+      {
+        "from": "resources/streamly-filter-sources.txt",
+        "to": "streamly-filter-sources.txt"
+      },
+      {
+        "from": "resources/opensubtitles-key.txt",
+        "to": "opensubtitles-key.txt"
+      }
+    ],
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "fileAssociations": [
+        {
+          "ext": [
+            "mp4",
+            "m4v",
+            "mkv",
+            "mov",
+            "avi",
+            "webm",
+            "ts",
+            "m2ts",
+            "mpg",
+            "mpeg",
+            "wmv"
+          ],
+          "name": "Vidéo",
+          "role": "Viewer",
+          "rank": "Alternate"
+        }
+      ],
+      "category": "public.app-category.entertainment",
+      "identity": null,
+      "icon": "build/icon.icns",
+      "extendInfo": {
+        "NSLocalNetworkUsageDescription": "IPTV Flow recherche les appareils Google Cast sur votre réseau local.",
+        "NSBonjourServices": [
+          "_googlecast._tcp"
+        ]
+      }
+    }
+  }
+}
